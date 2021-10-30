@@ -30,7 +30,7 @@ def command_2(update, context):
     for i in datas:
         if i.isdigit():
             add(univer, int(i))
-            update.message.reply_text(univer, int(i))
+            update.message.reply_text(f"{univer}, {int(i)}")
     update.message.reply_text("Muaffaqiyatli qo'shildi yana universitet id sini yuboring:")
     return state_1
 
