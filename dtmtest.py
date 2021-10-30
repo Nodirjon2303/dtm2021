@@ -194,8 +194,11 @@ def status_edit(fac_id):
 faculties = fac_id()
 print('Fakultitetlar:', faculties)
 for i in faculties:
-    A = region_time(i[1], i[0])
-    print(i[0], "id lik fakultet talabalari yozilmoqda DATABASEGA")
+    try:
+        A = region_time(i[1], i[0])
+        print(i[0], "id lik fakultet talabalari yozilmoqda DATABASEGA")
 
-    A.get_users()
-    status_edit(i[1])
+        A.get_users()
+        status_edit(i[1])
+    except Exception as e:
+        print(e)
