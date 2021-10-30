@@ -49,5 +49,5 @@ def add(university_id, faculty_id):
 
 for i in range(1000000):
     faculty_id = int(input("Fakultitet id sini kiriting:\n"))
-    add(314, faculty_id)
+    add(315, faculty_id)
     print(f"succesfully added {faculty_id}\n")
