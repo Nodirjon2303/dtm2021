@@ -190,15 +190,15 @@ def status_edit(fac_id):
         print(e, "line184")
     conn.close()
 
+while True:
+    faculties = fac_id()
+    print('Fakultitetlar:', faculties)
+    for i in faculties:
+        try:
+            A = region_time(i[1], i[0])
+            print(i[1], "id lik fakultet talabalari yozilmoqda DATABASEGA")
 
-faculties = fac_id()
-print('Fakultitetlar:', faculties)
-for i in faculties:
-    try:
-        A = region_time(i[1], i[0])
-        print(i[1], "id lik fakultet talabalari yozilmoqda DATABASEGA")
-
-        A.get_users()
-        status_edit(i[1])
-    except Exception as e:
-        print(e)
+            A.get_users()
+            status_edit(i[1])
+        except Exception as e:
+            print(e)
