@@ -26,7 +26,7 @@ def all_student():
         cursor.execute(f"SELECT talaba_id FROM talaba")
         res = cursor.fetchall()
     except Exception as e:
-        print(e,"line29")
+        print(e, "line29")
     conn.close()
     return res
 
@@ -44,10 +44,10 @@ class region_time:
         print("NATIJA:", self.convert[0])
         self.convert = str(self.convert)
         a = self.convert.rfind("<b>")
-        b = self.convert.find(' ', a+4)
+        b = self.convert.find(' ', a + 4)
         print("a=", a)
         print('b=', b)
-        self.ariza_soni = int(self.convert[a+3:b])
+        self.ariza_soni = int(self.convert[a + 3:b])
         print('Jami arizalar soni', self.ariza_soni)
         if int(self.ariza_soni) > 10:
             pass
@@ -57,7 +57,7 @@ class region_time:
         try:
             print("TEXT: ", self.talaba[4].text.split('\n'))
         except Exception as e:
-            print(e,"line60")
+            print(e, "line60")
         jami_talaba = all_student()
         host = "localhost"
         database = 'hotelbot'
@@ -80,15 +80,16 @@ class region_time:
             a = self.talaba[i].text.split('\n')
             print("A:", a)
             try:
-                print(a[2], a[1], a[5])
+                # print(a[2], a[1], a[5])
                 if int(a[1]) not in jami_talaba[0]:
                     cursor.execute(
-                        f"INSERT INTO talaba (name, talaba_id, result ) VALUES('{a[2]}' , {int(a[1])} ,'{a[5]}')")
+                        f"INSERT INTO talaba (name, talaba_id, result ) VALUES(%s, %s, %s)",
+                        ('{a[2]}', {int(a[1])}, '{a[5]}'))
                     conn.commit()
                 else:
                     print(f"Ushbu talaba jadvalda mavjud: {a[1]}")
             except Exception as e:
-                print(e,"line 91")
+                print(e, "line 91")
         conn.close()
         print("ARIZA", self.ariza_soni // 10 + 1)
 
@@ -122,12 +123,13 @@ class region_time:
                     print(a[2], a[1], a[5])
                     if int(a[1]) not in jami_talaba[0]:
                         cursor.execute(
-                            f"INSERT INTO talaba (name, talaba_id, result ) VALUES('{a[2]}' , {int(a[1])} ,'{a[5]}')")
+                            f"INSERT INTO talaba (name, talaba_id, result ) VALUES(%s, %s, %s)",
+                            ('{a[2]}', {int(a[1])}, '{a[5]}'))
                         conn.commit()
                     else:
                         print(f"Ushbu talaba jadvalda mavjud: {a[1]}")
                 except Exception as e:
-                    print(e,"line130")
+                    print(e, "line130")
         print(f'DATABASEGA {self.ariza_soni}', 'ta talaba yozildi')
         conn.close()
 
@@ -156,9 +158,10 @@ def fac_id():
 """)
         res = cursor.fetchall()
     except Exception as e:
-        print(e,"line159")
+        print(e, "line159")
     conn.close()
     return res
+
 
 def status_edit(fac_id):
     host = "localhost"
@@ -186,11 +189,10 @@ def status_edit(fac_id):
 
 
 faculties = fac_id()
-print('Fakultitetlar:' , faculties)
+print('Fakultitetlar:', faculties)
 for i in faculties:
     A = region_time(i[1], i[0])
     print(i[0], "id lik fakultet talabalari yozilmoqda DATABASEGA")
 
     A.get_users()
     status_edit(i[1])
-
