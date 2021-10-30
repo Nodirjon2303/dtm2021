@@ -57,7 +57,7 @@ class region_time:
         # try:
         #     print("TEXT: ", self.talaba[4].text.split('\n'))
         # except Exception as e:
-            print(e, "line60")
+        #     print(e, "line60")
         jami_talaba = all_student()
         host = "localhost"
         database = 'hotelbot'
