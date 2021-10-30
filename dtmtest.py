@@ -81,13 +81,13 @@ class region_time:
             print("A:", a)
             try:
                 # print(a[2], a[1], a[5])
-                # if int(a[1]) not in jami_talaba[0]:
-                cursor.execute(
-                    f"INSERT INTO talaba (name, talaba_id, result ) VALUES(%s, %s, %s)",
-                    (f'{a[2]}', int(a[1]), f'{a[5]}'))
-                conn.commit()
-            # else:
-        #     print(f"Ushbu talaba jadvalda mavjud: {a[1]}")
+                if int(a[1]) not in jami_talaba[0]:
+                    cursor.execute(
+                        f"INSERT INTO talaba (name, talaba_id, result ) VALUES(%s, %s, %s)",
+                        (f'{a[2]}', int(a[1]), f'{a[5]}'))
+                    conn.commit()
+                else:
+                    print(f"Ushbu talaba jadvalda mavjud: {a[1]}")
             except Exception as e:
                 print(e, "line 91")
 
