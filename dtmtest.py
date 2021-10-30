@@ -78,7 +78,9 @@ class region_time:
 
         for i in range(1, 11):
             a = self.talaba[i].text.split('\n')
+            print("A:", a)
             try:
+                print(a[2], a[1], a[5])
                 if int(a[1]) not in jami_talaba[0]:
                     cursor.execute(
                         f"INSERT INTO talaba (name, talaba_id, result ) VALUES('{a[2]}' , {int(a[1])} ,'{a[5]}')")
