@@ -81,57 +81,60 @@ class region_time:
             print("A:", a)
             try:
                 # print(a[2], a[1], a[5])
+                # if int(a[1]) not in jami_talaba[0]:
+                cursor.execute(
+                    f"INSERT INTO talaba (name, talaba_id, result ) VALUES(%s, %s, %s)",
+                    (f'{a[2]}', int(a[1]), f'{a[5]}'))
+                conn.commit()
+            # else:
+        #     print(f"Ushbu talaba jadvalda mavjud: {a[1]}")
+            except Exception as e:
+                print(e, "line 91")
+
+
+        conn.close()
+        print("ARIZA", self.ariza_soni // 10 + 1)
+
+
+def get_users(self):
+    host = "localhost"
+    database = 'hotelbot'
+    user = 'myprojectuser'
+    password = 'Nodir2303'
+    conn = psycopg2.connect(
+        host=host,
+        database=database,
+        user=user,
+        password=password,
+        port=5432
+    )
+    if conn:
+        print("succesfully connected")
+    else:
+        print('error')
+    cursor = conn.cursor()
+    for i in range(2, self.ariza_soni // 10 + 1):
+        self.url = f'https://mandat.dtm.uz/Home/AfterFilter?page={i}&region=14&university={self.univer_id}&faculty={self.fac_id}&edLang=1&edType=1&nog=False&muy=False&soldier=False&iiv=False&prez=0&sortorder=ResultDesc'
+        self.full_page = requests.get(self.url, self.headers)
+        self.soup = BeautifulSoup(self.full_page.content, 'html.parser')
+        self.talaba = self.soup.find_all('tr')
+        jami_talaba = all_student()
+        for j in range(1, 11):
+            a = self.talaba[j].text.split('\n')
+            print(a)
+            try:
+                # print(a[2], a[1], a[5])
                 if int(a[1]) not in jami_talaba[0]:
                     cursor.execute(
                         f"INSERT INTO talaba (name, talaba_id, result ) VALUES(%s, %s, %s)",
-                        (f'{a[2]}', {int(a[1])}, f'{a[5]}'))
+                        (f'{a[2]}', int(a[1]), f'{a[5]}'))
                     conn.commit()
                 else:
                     print(f"Ushbu talaba jadvalda mavjud: {a[1]}")
             except Exception as e:
-                print(e, "line 91")
-        conn.close()
-        print("ARIZA", self.ariza_soni // 10 + 1)
-
-    def get_users(self):
-        host = "localhost"
-        database = 'hotelbot'
-        user = 'myprojectuser'
-        password = 'Nodir2303'
-        conn = psycopg2.connect(
-            host=host,
-            database=database,
-            user=user,
-            password=password,
-            port=5432
-        )
-        if conn:
-            print("succesfully connected")
-        else:
-            print('error')
-        cursor = conn.cursor()
-        for i in range(2, self.ariza_soni // 10 + 1):
-            self.url = f'https://mandat.dtm.uz/Home/AfterFilter?page={i}&region=14&university={self.univer_id}&faculty={self.fac_id}&edLang=1&edType=1&nog=False&muy=False&soldier=False&iiv=False&prez=0&sortorder=ResultDesc'
-            self.full_page = requests.get(self.url, self.headers)
-            self.soup = BeautifulSoup(self.full_page.content, 'html.parser')
-            self.talaba = self.soup.find_all('tr')
-            jami_talaba = all_student()
-            for j in range(1, 11):
-                a = self.talaba[j].text.split('\n')
-                print(a)
-                try:
-                    # print(a[2], a[1], a[5])
-                    # if int(a[1]) not in jami_talaba[0]:
-                    cursor.execute(
-                        f"INSERT INTO talaba (name, talaba_id, result ) VALUES(%s, %s, %s)",
-                        (f'{a[2]}', {int(a[1])}, f'{a[5]}'))
-                    conn.commit()
-                # else:
-                #     print(f"Ushbu talaba jadvalda mavjud: {a[1]}")
-                except Exception as e:
-                    print(e, "line130")
-        print(f'DATABASEGA {self.ariza_soni}', 'ta talaba yozildi')
-        conn.close()
+                print(e, "line130")
+    print(f'DATABASEGA {self.ariza_soni}', 'ta talaba yozildi')
+    conn.close()
 
 
 def fac_id():
