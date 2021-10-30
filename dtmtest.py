@@ -196,7 +196,7 @@ print('Fakultitetlar:', faculties)
 for i in faculties:
     try:
         A = region_time(i[1], i[0])
-        print(i[0], "id lik fakultet talabalari yozilmoqda DATABASEGA")
+        print(i[1], "id lik fakultet talabalari yozilmoqda DATABASEGA")
 
         A.get_users()
         status_edit(i[1])
