@@ -43,12 +43,3 @@ def add(university_id, faculty_id):
     cursor.execute(f"INSERT INTO faculty (university_id, faculty_id) VALUES ({university_id}, {faculty_id})")
     conn.commit()
 
-
-# cursor.execute("DELETE FROM faculty WHERE university_id = 306")
-# conn.commit()
-
-for i in range(1000000):
-    university_id = int(input("Universitet id sini kiriting"))
-    faculty_id = int(input("Fakultitet id sini kiriting:\n"))
-    add(university_id, faculty_id)
-    print(f"succesfully added {faculty_id}\n")
