@@ -21,13 +21,13 @@ def all_student():
         print("succesfully connected")
     else:
         print('error')
-    cursor = con.cursor()
+    cursor = conn.cursor()
     try:
         cursor.execute(f"SELECT talaba_id FROM talaba")
         res = cursor.fetchall()
     except Exception as e:
         print(e)
-    con.close()
+    conn.close()
     return res
 
 
@@ -74,7 +74,7 @@ class region_time:
             print("succesfully connected")
         else:
             print('error')
-        cursor = con.cursor()
+        cursor = conn.cursor()
 
         for i in range(1, 11):
             a = self.talaba[i].text.split('\n')
@@ -82,12 +82,12 @@ class region_time:
                 if int(a[1]) not in jami_talaba[0]:
                     cursor.execute(
                         f"INSERT INTO talaba (name, talaba_id, result ) VALUES('{a[2]}' , {int(a[1])} ,'{a[5]}')")
-                    con.commit()
+                    conn.commit()
                 else:
                     print(f"Ushbu talaba jadvalda mavjud: {a[1]}")
             except Exception as e:
                 print(e)
-        con.close()
+        conn.close()
         print("ARIZA", self.ariza_soni // 10 + 1)
 
     def get_users(self):
@@ -106,7 +106,7 @@ class region_time:
             print("succesfully connected")
         else:
             print('error')
-        cursor = con.cursor()
+        cursor = conn.cursor()
         for i in range(2, self.ariza_soni // 10 + 1):
             self.url = f'https://mandat.dtm.uz/Home/AfterFilter?page={i}&region=14&university={self.univer_id}&faculty={self.fac_id}&edLang=1&edType=1&nog=False&muy=False&soldier=False&iiv=False&prez=0&sortorder=ResultDesc'
             self.full_page = requests.get(self.url, self.headers)
@@ -119,13 +119,13 @@ class region_time:
                     if int(a[1]) not in jami_talaba[0]:
                         cursor.execute(
                             f"INSERT INTO talaba (name, talaba_id, result ) VALUES('{a[2]}' , {int(a[1])} ,'{a[5]}')")
-                        con.commit()
+                        conn.commit()
                     else:
                         print(f"Ushbu talaba jadvalda mavjud: {a[1]}")
                 except Exception as e:
                     print(e)
         print(f'DATABASEGA {self.ariza_soni}', 'ta talaba yozildi')
-        con.close()
+        conn.close()
 
 
 def fac_id():
@@ -144,7 +144,7 @@ def fac_id():
         print("succesfully connected")
     else:
         print('error')
-    cursor = con.cursor()
+    cursor = conn.cursor()
     try:
         cursor.execute("""
         SELECT university_id, faculty_id FROM faculty
@@ -153,7 +153,7 @@ def fac_id():
         res = cursor.fetchall()
     except Exception as e:
         print(e)
-    con.close()
+    conn.close()
     return res
 
 def status_edit(fac_id):
@@ -172,13 +172,13 @@ def status_edit(fac_id):
         print("succesfully connected")
     else:
         print('error')
-    cursor = con.cursor()
+    cursor = conn.cursor()
     try:
         cursor.execute(f"UPDATE faculty SET status = 'good' WHERE faculty_id = {fac_id}")
-        con.commit()
+        conn.commit()
     except Exception as e:
         print(e)
-    con.close()
+    conn.close()
 
 
 faculties = fac_id()
