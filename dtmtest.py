@@ -41,12 +41,12 @@ class region_time:
         self.full_page = requests.get(self.time, self.headers)
         self.soup = BeautifulSoup(self.full_page.content, 'html.parser')
         self.convert = self.soup.findAll('div', {'class': 'alert'}, '<b>')
-        print("NATIJA:", self.convert[0])
+        # print("NATIJA:", self.convert[0])
         self.convert = str(self.convert)
         a = self.convert.rfind("<b>")
         b = self.convert.find(' ', a + 4)
-        print("a=", a)
-        print('b=', b)
+        # print("a=", a)
+        # print('b=', b)
         self.ariza_soni = int(self.convert[a + 3:b])
         print('Jami arizalar soni', self.ariza_soni)
         if int(self.ariza_soni) > 10:
@@ -54,9 +54,9 @@ class region_time:
         else:
             return None
         self.talaba = self.soup.find_all('tr')
-        try:
-            print("TEXT: ", self.talaba[4].text.split('\n'))
-        except Exception as e:
+        # try:
+        #     print("TEXT: ", self.talaba[4].text.split('\n'))
+        # except Exception as e:
             print(e, "line60")
         jami_talaba = all_student()
         host = "localhost"
@@ -78,7 +78,7 @@ class region_time:
 
         for i in range(1, 11):
             a = self.talaba[i].text.split('\n')
-            print("A:", a)
+            # print("A:", a)
             try:
                 # print(a[2], a[1], a[5])
                 if int(a[1]) not in jami_talaba[0]:
@@ -93,7 +93,7 @@ class region_time:
 
 
         conn.close()
-        print("ARIZA", self.ariza_soni // 10 + 1)
+        # print("ARIZA", self.ariza_soni // 10 + 1)
 
 
     def get_users(self):
@@ -121,7 +121,7 @@ class region_time:
             jami_talaba = all_student()
             for j in range(1, 11):
                 a = self.talaba[j].text.split('\n')
-                print(a)
+                # print(a)
                 try:
                     # print(a[2], a[1], a[5])
                     if int(a[1]) not in jami_talaba[0]:
