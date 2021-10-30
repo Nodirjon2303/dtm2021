@@ -6,8 +6,21 @@ import psycopg2
 
 
 def all_student():
-    
-    con = connect('DTM.db')
+    host = "localhost"
+    database = 'hotelbot'
+    user = 'myprojectuser'
+    password = 'Nodir2303'
+    conn = psycopg2.connect(
+        host=host,
+        database=database,
+        user=user,
+        password=password,
+        port=5432
+    )
+    if conn:
+        print("succesfully connected")
+    else:
+        print('error')
     cursor = con.cursor()
     try:
         cursor.execute(f"SELECT talaba_id FROM talaba")
@@ -46,7 +59,21 @@ class region_time:
         except Exception as e:
             print(e)
         jami_talaba = all_student()
-        con = connect('DTM.db')
+        host = "localhost"
+        database = 'hotelbot'
+        user = 'myprojectuser'
+        password = 'Nodir2303'
+        conn = psycopg2.connect(
+            host=host,
+            database=database,
+            user=user,
+            password=password,
+            port=5432
+        )
+        if conn:
+            print("succesfully connected")
+        else:
+            print('error')
         cursor = con.cursor()
 
         for i in range(1, 11):
@@ -64,7 +91,21 @@ class region_time:
         print("ARIZA", self.ariza_soni // 10 + 1)
 
     def get_users(self):
-        con = connect('DTM.db')
+        host = "localhost"
+        database = 'hotelbot'
+        user = 'myprojectuser'
+        password = 'Nodir2303'
+        conn = psycopg2.connect(
+            host=host,
+            database=database,
+            user=user,
+            password=password,
+            port=5432
+        )
+        if conn:
+            print("succesfully connected")
+        else:
+            print('error')
         cursor = con.cursor()
         for i in range(2, self.ariza_soni // 10 + 1):
             self.url = f'https://mandat.dtm.uz/Home/AfterFilter?page={i}&region=14&university={self.univer_id}&faculty={self.fac_id}&edLang=1&edType=1&nog=False&muy=False&soldier=False&iiv=False&prez=0&sortorder=ResultDesc'
@@ -88,7 +129,21 @@ class region_time:
 
 
 def fac_id():
-    con = connect('DTM.db')
+    host = "localhost"
+    database = 'hotelbot'
+    user = 'myprojectuser'
+    password = 'Nodir2303'
+    conn = psycopg2.connect(
+        host=host,
+        database=database,
+        user=user,
+        password=password,
+        port=5432
+    )
+    if conn:
+        print("succesfully connected")
+    else:
+        print('error')
     cursor = con.cursor()
     try:
         cursor.execute("""
@@ -102,7 +157,21 @@ def fac_id():
     return res
 
 def status_edit(fac_id):
-    con = connect('DTM.db')
+    host = "localhost"
+    database = 'hotelbot'
+    user = 'myprojectuser'
+    password = 'Nodir2303'
+    conn = psycopg2.connect(
+        host=host,
+        database=database,
+        user=user,
+        password=password,
+        port=5432
+    )
+    if conn:
+        print("succesfully connected")
+    else:
+        print('error')
     cursor = con.cursor()
     try:
         cursor.execute(f"UPDATE faculty SET status = 'good' WHERE faculty_id = {fac_id}")
