@@ -121,9 +121,9 @@ class region_time:
             jami_talaba = all_student()
             for j in range(1, 11):
                 a = self.talaba[j].text.split('\n')
-                # print(a)
+                print(a)
                 try:
-                    # print(a[2], a[1], a[5])
+                    print(a[2], a[1], a[5])
                     if int(a[1]) not in jami_talaba[0]:
                         cursor.execute(
                             f"INSERT INTO talaba (name, talaba_id, result ) VALUES(%s, %s, %s)",
@@ -194,6 +194,7 @@ while True:
     faculties = fac_id()
     print('Fakultitetlar:', faculties)
     for i in faculties:
+        print('Fakultitet:', i)
         try:
             A = region_time(i[1], i[0])
             print(i[1], "id lik fakultet talabalari yozilmoqda DATABASEGA")
