@@ -45,9 +45,9 @@ class region_time:
         self.convert = str(self.convert)
         a = self.convert.rfind("<b>")
         b = self.convert.find(' ', a + 4)
-        print("a=", a)
-        print('b=', b)
-        print("\nSELF CONVERT: ", self.convert)
+        # print("a=", a)
+        # print('b=', b)
+        # print("\nSELF CONVERT: ", self.convert)
         self.ariza_soni = int(self.convert[a + 3:b])
         print('Jami arizalar soni', self.ariza_soni)
         if int(self.ariza_soni) > 10:
@@ -71,10 +71,6 @@ class region_time:
             password=password,
             port=5432
         )
-        if conn:
-            print("succesfully connected")
-        else:
-            print('error')
         cursor = conn.cursor()
 
         for i in range(1, 11):
@@ -109,10 +105,6 @@ class region_time:
             password=password,
             port=5432
         )
-        if conn:
-            print("succesfully connected")
-        else:
-            print('error')
         cursor = conn.cursor()
         for i in range(2, self.ariza_soni // 10 + 1):
             self.url = f'https://mandat.dtm.uz/Home/AfterFilter?page={i}&region=14&university={self.univer_id}&faculty={self.fac_id}&edLang=1&edType=1&nog=False&muy=False&soldier=False&iiv=False&prez=0&sortorder=ResultDesc'
@@ -122,9 +114,7 @@ class region_time:
             jami_talaba = all_student()
             for j in range(1, 11):
                 a = self.talaba[j].text.split('\n')
-                print(a)
                 try:
-                    print(a[2], a[1], a[5])
                     if int(a[1]) not in jami_talaba[0]:
                         cursor.execute(
                             f"INSERT INTO talaba (name, talaba_id, result ) VALUES(%s, %s, %s)",
