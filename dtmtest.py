@@ -45,8 +45,9 @@ class region_time:
         self.convert = str(self.convert)
         a = self.convert.rfind("<b>")
         b = self.convert.find(' ', a + 4)
-        # print("a=", a)
-        # print('b=', b)
+        print("a=", a)
+        print('b=', b)
+        print("\nSELF CONVERT: ", self.convert)
         self.ariza_soni = int(self.convert[a + 3:b])
         print('Jami arizalar soni', self.ariza_soni)
         if int(self.ariza_soni) > 10:
