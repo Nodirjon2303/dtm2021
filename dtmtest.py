@@ -199,10 +199,10 @@ while True:
         try:
             A = region_time(i[1], i[0])
             print(i[1], "id lik fakultet talabalari yozilmoqda DATABASEGA")
-            break
+
             A.get_users()
             status_edit(i[1])
         except Exception as e:
             print(e)
-        break
-    break
+
+
